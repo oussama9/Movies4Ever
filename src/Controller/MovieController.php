@@ -13,13 +13,18 @@ class MovieController extends ApiController
     /**
      * @Route("/movies", methods="GET")
      */
-    public function index(Request $request, MovieRepository $movieRepository)
+    public function showMovies(Request $request, MovieRepository $movieRepository)
     {
         $responseData = null;
         if($request->get('id')) {
             $responseData = $movieRepository->find($request->get('id'));
             if (!$responseData) {
                 return $this->respondNotFound('movie not found with this id');
+            }
+        } else if ($request->get('title')) {
+            $responseData = $movieRepository->findByTitle($request->get('title'));
+            if (!$responseData) {
+                return $this->respondNotFound('No results found for :'.$request->get('title'));
             }
         } else {
             $responseData = $movieRepository->findAll();
@@ -121,23 +126,20 @@ class MovieController extends ApiController
      */
     public function deleteMovie(Request $request, MovieRepository $movieRepository, EntityManagerInterface $em)
     {
-        if (! $request->get('id')) {
+        if (!$request->get('id')) {
             return $this->respondBadRequestError('Please provide an id!');
         } else {
             $movieToDelete = $movieRepository->find($request->get('id'));
             if (!$movieToDelete) {
                 return $this->respondNotFound('movie not found with this id');
             }
-
-            // merge the new movie
             $em->remove($movieToDelete);
             $em->flush();
         }
-
         $data = [
             'message' => 'movie deleted',
         ];
-
         return $this->respond($data);
     }
+
 }
