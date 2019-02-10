@@ -1,0 +1,287 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Tripartie",
+		"_postman_id": "a5b29959-e373-764e-8b92-881377fae6d0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Movies",
+			"description": "",
+			"item": [
+				{
+					"name": "Add new movie",
+					"request": {
+						"url": "http://localhost:8000/movies",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\" : \"captain America\",\n\t\"releaseYear\" : 2020,\n\t\"description\" : \"interseting\",\n\t\"director\" : \"*????\",\n\t\"note\" : 5\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Update a movie",
+					"request": {
+						"url": "http://localhost:8000/movies",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 1,\n    \"title\":\"f\" ,\n    \"description\": \"bin\",\n    \"director\": \"\",\n    \"note\": 5\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get movies, all, by id, by title",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8000/movies",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"movies"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "ww",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a movie",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8000/movies?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"movies"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WatchList",
+			"description": "",
+			"item": [
+				{
+					"name": "Add a watch list",
+					"request": {
+						"url": "http://localhost:8000/lists",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"name\": \"watch list test n2\",\r\n\t\"description\": \"description of watch list test n2\",\r\n\t\"movies\": [4,2,3]\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "EditList",
+					"request": {
+						"url": "http://localhost:8000/lists",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"id\": 4,\r\n\t\"name\": \"editt watch list test n2\",\r\n\t\"description\": \"description of watch list test n2\"\r\n\t\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Get watchlists, all ,by id",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8000/lists?id=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"lists"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "4",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "addMovieToList",
+					"request": {
+						"url": "http://localhost:8000/listMovies",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"listId\" : 2,\n\t\"movieId\" : 4\n\n\n\n\n\t\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "deleteMovieFromList",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8000/listMovies?listId=2&movieId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"listMovies"
+							],
+							"query": [
+								{
+									"key": "listId",
+									"value": "2",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "movieId",
+									"value": "4",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Remove a watchlist",
+					"request": {
+						"url": {
+							"raw": "http://localhost:8000/lists?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"lists"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

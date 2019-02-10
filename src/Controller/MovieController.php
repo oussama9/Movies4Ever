@@ -78,12 +78,12 @@ class MovieController extends ApiController
     {
         $request = $this->transformJsonBody($request);
 
-        if (! $request) {
+        if (!$request) {
             return $this->respondBadRequestError('Please provide a valid request!');
         }
 
         // validate the id
-        if (! $request->get('id')) {
+        if (!$request->get('id')) {
             return $this->respondBadRequestError('Please provide an id!');
         }
 

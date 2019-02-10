@@ -61,6 +61,38 @@ class WatchListController extends ApiController
         return $this->respondCreated($watchList);
     }
 
+    /**
+     * @Route("/lists", methods="PUT")
+     */
+    public function editWatchList(Request $request, WatchListRepository $watchListRepository, EntityManagerInterface $em)
+    {
+        $request = $this->transformJsonBody($request);
+
+        if (!$request) {
+            return $this->respondBadRequestError('Please provide a valid request!');
+        }
+
+        // validate the id
+        if (!$request->get('id')) {
+            return $this->respondBadRequestError('Please provide an id!');
+        }
+
+        $list = $watchListRepository->find($request->get('id'));
+        if (!$list) {
+            return $this->respondNotFound('no list found with this id ');
+        }
+
+        if ( $request->get('name')) {
+            $list->setName($request->get('name'));
+        }
+        if ( $request->get('description')) {
+            $list->setDescription($request->get('description'));
+        }
+        $em->merge($list);
+        $em->flush();
+
+        return $this->respond($list);
+    }
 
     /**
      * @Route("/listMovies", methods="PUT")
